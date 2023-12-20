@@ -1,35 +1,20 @@
-import React, { useState, useEffect} from "react";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import Loading from '@components/Loading';
-import useAuthentication from '@config/useAuthentication';
-import StacksUsers from '@routes/StacksUsers';
-import StacksAuth from '@routes/StacksAuth';
+import Deve from '@views/Signin';
 
-const StacksApp = ()=>{
- 
-  const [loading, setLoading] = useState(false);
-  const { user } = useAuthentication();
-  
-  useEffect(() => {
-    startLoading();
-  }, []);
+const Stack = createNativeStackNavigator();
 
-  const startLoading = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    },2000);
-  };
+const Dev = () =>{
 
-  if(!user){
-    console.log('users == false');
-    return loading == true ? <Loading state={loading}/> : <StacksAuth/> 
-  }else{
-    console.log('users == true');
-    return loading == true ? <Loading state={loading}/> : <StacksUsers/>
-    
-  }
+    return(
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+           
+            <Stack.Screen
+                name='Deve'
+                component={Deve}
+            />
+        </Stack.Navigator>
+    )
+};
 
-}
-
-export default StacksApp;
+export default Dev;
